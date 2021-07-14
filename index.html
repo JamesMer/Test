@@ -18,33 +18,47 @@
     
     <body>
         <div id="app" class="container">
-            <h1>Application Test</h1><br>
-            <form class="form-inline">
+            <h1>Math Tester</h1><br>
+            <form id="forms" class="form-inline">
                 <div class="form-group">
-                    <label for="input">Value</label>
-                    <input id="input" class="form-control" v-model="message">
-                    <button type="button" class="btn" v-on:click="action">Show/Hide</button>
+                    <label for="input">{{ x }} + {{ y }} = </label>
+                    <input id="input" class="form-control" v-model="answer">
+                    <button type="button" class="btn" v-on:click="check">Check</button>
+                    <button type="button" class="btn" v-on:click="generateQuestion">Generate</button>
                 </div>
             </form>
-            <span v-if="visible">{{ message }}</span>
+            <br>
+            <div v-bind:class="alertClass">Your answer is {{ message }}</div>
         </div>
         <script>
             var vm = new Vue({
-                el: "#app",
+                el: '#app',
                 data: {
-                    message: "Hello World!",
-                    visible: false
+                    x: Math.floor((Math.random() * 10) + 1),
+                    y: Math.floor((Math.random() * 10) + 1),
+                    message: null,
+                    answer: null,
+                    alertClass: "alert alert-info"
                 },
                 methods: {
-                    action: function() {
-                        if (this.visible) {
-                            this.visible = false;
+                    check: function() {
+                        if (this.x + this.y == this.answer) {
+                            this.message = "correct";
+                            this.alertClass = "alert alert-success";
+
                         } else {
-                            this.visible = true;
+                            this.message = "incorrect"
+                            this.alertClass = "alert alert-danger";
                         }
+                    },
+                    generateQuestion: function() {
+                        this.x = Math.floor((Math.random() * 10) + 1);
+                        this.y = Math.floor((Math.random() * 10) + 1);
+                        this.alertClass = "alert alert-info";
+                        this.message = "";
                     }
                 }
-            });
+            })
         </script>
     </body>
 </html>
