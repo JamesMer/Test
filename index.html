@@ -19,30 +19,36 @@
     <body>
         <div id="app" class="container">
             <h1>Math Tester</h1><br>
-            <form id="forms" class="form-inline">
+            <div class="form-inline">
                 <div class="form-group">
-                    <label for="input">{{ x }} + {{ y }} = </label>
-                    <input id="input" class="form-control" v-model="answer" type="text" name="answer">
+                    <label for="input">{{ x }} {{ operatorArray[operator] }} {{ y }} = </label>
+                    <input id="input" type="text" class="form-control" v-model="answer">
                     <button type="button" class="btn" v-on:click="check">Check</button>
                     <button type="button" class="btn" v-on:click="generateQuestion">Generate</button>
                 </div>
-            </form>
+            </div>
             <br>
             <div v-bind:class="alertClass">Your answer is {{ message }}</div>
         </div>
         <script>
+            function randomNumber(x, y) {
+                return Math.floor((Math.random() * y) + x);
+            }
+
             var vm = new Vue({
                 el: '#app',
                 data: {
-                    x: Math.floor((Math.random() * 10) + 1),
-                    y: Math.floor((Math.random() * 10) + 1),
+                    x: randomNumber(0, 9),
+                    y: randomNumber(0, 9),
                     message: null,
                     answer: null,
-                    alertClass: "alert alert-info"
+                    alertClass: "alert alert-info",
+                    operatorArray: ["+", "-", "*"],
+                    operator: randomNumber(0, 2)
                 },
                 methods: {
                     check: function() {
-                        if (this.x + this.y == this.answer) {
+                        if ( eval(this.x + this.operatorArray[this.operator] + this.y) == this.answer ) {
                             this.message = "correct";
                             this.alertClass = "alert alert-success";
 
@@ -52,11 +58,12 @@
                         }
                     },
                     generateQuestion: function() {
-                        this.x = Math.floor((Math.random() * 10) + 1);
-                        this.y = Math.floor((Math.random() * 10) + 1);
+                        this.x = randomNumber(0, 9);
+                        this.y = randomNumber(0, 9);
                         this.alertClass = "alert alert-info";
                         this.message = "";
                         this.answer = "";
+                        operator: randomNumber(0, 2);
                     }
                 }
             })
