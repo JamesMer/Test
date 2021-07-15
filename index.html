@@ -18,28 +18,36 @@
     
     <body>
         <div id="app" class="container">
-            <h1>Math Tester</h1><br>
-            <div class="form-inline">
-                <div class="form-group">
-                    <label for="input">{{ x }} {{ operatorArray[operator] }} {{ y }} = </label>
-                    <input id="input" type="text" class="form-control" v-model="answer">
-                    <button type="button" class="btn" v-on:click="check">Check</button>
-                    <button type="button" class="btn" v-on:click="generateQuestion">Generate</button>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>Math Tester</h1>
+                </div>
+
+                <div class="panel-body">
+                    <label for="input">{{ x }} {{ operatorArray[operator] }} {{ y }}</label>
+                        <div class="input-group">
+                            <input id="input" class="form-control" v-model="answer" type="text" placeholder="24">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-primary" v-on:click="check">Check</button>
+                                <button type="button" class="btn btn-primary" v-on:click="generateQuestion">Generate</button>
+                            </div>
+                        </div>
+                    <br>
+                    <div v-bind:class="alertClass" style="margin-left: 16px; margin-right: 16px">Your answer is {{ message }}</div>
                 </div>
             </div>
-            <br>
-            <div v-bind:class="alertClass">Your answer is {{ message }}</div>
         </div>
         <script>
             function randomNumber(x, y) {
-                return Math.floor((Math.random() * y) + x);
+                return Math.floor((Math.random() * (y + 1)) + x);
             }
 
             var vm = new Vue({
                 el: '#app',
                 data: {
-                    x: randomNumber(0, 9),
-                    y: randomNumber(0, 9),
+                    x: randomNumber(0, 10),
+                    y: randomNumber(0, 10),
                     message: null,
                     answer: null,
                     alertClass: "alert alert-info",
@@ -58,8 +66,8 @@
                         }
                     },
                     generateQuestion: function() {
-                        this.x = randomNumber(0, 9);
-                        this.y = randomNumber(0, 9);
+                        this.x = randomNumber(0, 10);
+                        this.y = randomNumber(0, 10);
                         this.operator = randomNumber(0, 2);
                         this.alertClass = "alert alert-info";
                         this.message = "";
