@@ -20,24 +20,16 @@
     <body>
         <div id="app" class="container">
             <br>
-            <div class="panel panel-default mw-75">
-                <div class="panel-heading">
-                    <h1>Math Tester</h1>
-                </div>
+            <h1>Math Tester</h1>
 
-                <div class="panel-body">
-                    <label for="input">{{ x }} {{ operatorArray[operator] }} {{ y }}</label>
-                        <div class="input-group">
-                            <input id="input" class="form-control" v-model="answer" type="text" placeholder="24">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-primary" v-on:click="check">Check</button>
-                                <button type="button" class="btn btn-primary" v-on:click="generateQuestion">Generate</button>
-                            </div>
-                        </div>
-                    <br>
-                    <div v-bind:class="alertClass" style="margin-left: 16px; margin-right: 16px">Your answer is {{ message }}</div>
-                </div>
+            <label for="input">{{ x }} {{ operatorArray[operator] }} {{ y }}</label>
+            <div class="input-group">
+                <input id="input" class="form-control" v-model="answer" type="text">
+                <button type="button" class="btn btn-primary" v-on:click="check">Check</button>
+                <button type="button" class="btn btn-primary" v-on:click="generateQuestion">Generate</button>
             </div>
+            <br>
+            <div v-bind:class="alertClass" style="margin-left: 16px; margin-right: 16px">Your answer is {{ message }}</div>
         </div>
         <script>
             function randomNumber(x, y) {
