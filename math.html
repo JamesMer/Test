@@ -35,14 +35,17 @@
 
             var vm = new Vue({
                 el: '#app',
-                data: {
-                    x: randomNumber(0, 10),
-                    y: randomNumber(0, 10),
-                    message: null,
-                    answer: null,
-                    alertClass: "alert alert-info",
-                    operatorArray: ["+", "-", "*"],
-                    operator: randomNumber(0, 2)
+                data: function () {
+                    return {
+                        x: randomNumber(0, 10),
+                        y: randomNumber(0, 10),
+                        message: null,
+                        answer: null,
+                        alertClass: "alert alert-info",
+                        operatorArray: ["+", "-", "*"],
+                        operator: randomNumber(0, 2)
+                    };
+
                 },
                 methods: {
                     check: function() {

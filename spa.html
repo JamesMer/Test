@@ -10,8 +10,26 @@
     </head>
 
     <body>
-        <div class="container">
-            <a href="#">Link 1</a>
+        <div id="app" class="container">
+            <a href="#">Link 1</a><br>
+            <button-counter></button-counter>
+            <button-counter></button-counter>
+            <button-counter></button-counter>
         </div>
+
+        <script>
+            Vue.component("button-counter", {
+                data: function () {
+                    return ({
+                        counter: 0
+                    });
+                },
+                template: "<button class='btn btn-primary' v-on:click='counter++'>You clicked me {{ counter }} times</button>",
+            });
+
+            var vm = new Vue({
+                el: "#app"
+            });
+        </script>
     </body>
 </html>
